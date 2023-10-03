@@ -1,3 +1,4 @@
-plum
-build
-*.userdb
+config/plum
+config/*.userdb
+config/user.yaml
+config/build
