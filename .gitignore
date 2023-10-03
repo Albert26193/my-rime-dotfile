@@ -2,3 +2,5 @@ config/plum
 config/*.userdb
 config/user.yaml
 config/build
+
+.DS_Store
