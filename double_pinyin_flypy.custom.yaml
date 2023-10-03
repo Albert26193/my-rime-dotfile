@@ -1,6 +1,9 @@
 # Rime schema
 # encoding: utf-8
 
+patch:
+  translator/preedit_format: []
+
 schema:
   schema_id: double_pinyin_flypy
   name: 小鶴雙拼
