@@ -53,13 +53,9 @@ speller:
   alphabet: zyxwvutsrqponmlkjihgfedcba
   delimiter: " '"
   algebra:
-
     - erase/^xx$/
     - derive/^([jqxy])u$/$1v/
     - derive/^([aoe])([ioun])$/$1$1$2/
-    - derive/([ie])ng$/$1n/ #  ing => in
-    - derive/([ie])n$/$1ng/ # in => ing
-
     - xform/^([aoe])(ng)?$/$1$1$2/
     - xform/iu$/Q/
     - xform/(.)ei$/$1W/

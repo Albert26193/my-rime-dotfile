@@ -1,37 +1,32 @@
-# Rime schema
-# encoding: utf-8
-
 patch:
-  translator/preedit_format: []
-  #載入朙月拼音擴充詞庫
-  'translator/dictionary': luna_pinyin.extended
-
-schema:
-  schema_id: double_pinyin_flypy
-  name: 小鶴雙拼
-  version: "0.18"
-  author:
-    - double pinyin layout by 鶴
-    - Rime schema by 佛振 <chen.sst@gmail.com>
-  description: |
-    朙月拼音＋小鶴雙拼方案。
-  dependencies:
-    - stroke
-
-switches:
-  - name: ascii_mode
-    reset: 0
-    states: [ 中文, 西文 ]
-  - name: full_shape
-    states: [ 半角, 全角 ]
-  - name: simplification
-    reset: 1
-    states: [ 漢字, 汉字 ]
-  - name: ascii_punct
-    states: [ 。，, ．， ]
-
-engine:
-  processors:
+  schema/name: 小鹤双拼
+  switches:
+    - name: ascii_mode
+      reset: 0
+      states: [ 中文, 西文 ]
+    - name: emoji_suggestion
+      reset: 1
+      states: [ "No", "Yes" ]
+    - name: full_shape
+      states: [ 半角, 全角 ]
+    - name: simplification
+      reset: 1
+      states: [ 漢字, 汉字 ]
+    - name: ascii_punct
+      states: [ 。，, ．， ]
+  engine/translators:
+    # - lua_translator@date_translator
+    # - lua_translator@week_translator
+    - punct_translator
+    - script_translator
+    - table_translator@custom_phrase
+  engine/filters:
+    - simplifier@emoji_suggestion
+    - simplifier
+    - uniquifier
+    - charset_filter@gbk
+    - single_char_filter
+  engine/processors:
     - ascii_composer
     - recognizer
     - key_binder
@@ -40,31 +35,59 @@ engine:
     - selector
     - navigator
     - express_editor
-  segmentors:
-    - ascii_segmentor
-    - matcher
-    - abc_segmentor
-    - punct_segmentor
-    - fallback_segmentor
-  translators:
-    - punct_translator
-    - reverse_lookup_translator
-    - script_translator
-  filters:
-    - simplifier
-    - uniquifier
+  emoji_suggestion:
+    opencc_config: emoji.json
+    option_name: emoji_suggestion
+    # tips: all
+  reverse_lookup: {}
+  
+  #載入朙月拼音擴充詞庫
+  'translator/dictionary': luna_pinyin.extended
+  'translator/preedit_format': {}
 
-speller:
-  alphabet: zyxwvutsrqponmlkjihgfedcba
-  delimiter: " '"
-  algebra:
+  # 自定义符号上屏
+  punctuator:
+    import_preset: symbols
+    symbols:
+      "/bb": [😀,😁,🍺,😂,😃,😄,😅,😆,😉,😊,😋,😎,😍,😘,😗]
+      "/ss": [💪,👈,👉,👆,👇,✋,👌,👍,👎,✊,👊,👋,👏,👐]
+    half_shape:
+      "#": "#"
+      "*": "*"
+      "`": "`"
+      "~": "~"
+      "@": "@"
+      "=": "="
+      '\': "、"
+      "%": "%"
+      "$": ["¥", "$", "€", "£", "¢", "¤"]
+      "|": ["|", "｜", "·", "・", "§", "¦", "‖", "︴"]
+      "/": ["/", "÷"]
+      "'": { pair: ["「", "」"] }
+      "[": ["【", "〔", "［"]
+      "]": ["】", "〕", "］"]
+      "<": "《"
+      ">": "》"
 
+  recognizer/patterns/punct: "^/([0-9]0?|[A-Za-z]+)$"
+
+  ### 双拼使用自定义词典 custom_phrase.txt
+  custom_phrase:
+    dictionary: ""
+    user_dict: custom_phrase
+    db_class: stabledb
+    enable_completion: false
+    enable_sentence: false
+    initial_quality: 1
+  "engine/translators/@5": table_translator@custom_phrase
+
+  # 模糊音
+  'speller/algebra':
     - erase/^xx$/
     - derive/^([jqxy])u$/$1v/
     - derive/^([aoe])([ioun])$/$1$1$2/
     - derive/([ie])ng$/$1n/ #  ing => in
     - derive/([ie])n$/$1ng/ # in => ing
-
     - xform/^([aoe])(ng)?$/$1$1$2/
     - xform/iu$/Q/
     - xform/(.)ei$/$1W/
@@ -94,61 +117,11 @@ speller:
     - xlit/QWRTYUIOPSDFGHJKLZXCVBNM/qwrtyuiopsdfghjklzxcvbnm/
 
 
-translator:
-  dictionary: luna_pinyin.extended
-  prism: double_pinyin_flypy
-  preedit_format: 
-    - xform/([bpmfdtnljqx])n/$1iao/
-    - xform/(\w)g/$1eng/
-    - xform/(\w)q/$1iu/
-    - xform/(\w)w/$1ei/
-    - xform/([dtnlgkhjqxyvuirzcs])r/$1uan/
-    - xform/(\w)t/$1ve/
-    - xform/(\w)y/$1un/
-    - xform/([dtnlgkhvuirzcs])o/$1uo/
-    - xform/(\w)p/$1ie/
-    - xform/([jqx])s/$1iong/
-    - xform/(\w)s/$1ong/
-    - xform/(\w)d/$1ai/
-    - xform/(\w)f/$1en/
-    - xform/(\w)h/$1ang/
-    - xform/(\w)j/$1an/
-    - xform/([gkhvuirzcs])k/$1uai/
-    - xform/(\w)k/$1ing/
-    - xform/([jqxnl])l/$1iang/
-    - xform/(\w)l/$1uang/
-    - xform/(\w)z/$1ou/
-    - xform/([gkhvuirzcs])x/$1ua/
-    - xform/(\w)x/$1ia/
-    - xform/(\w)c/$1ao/
-    - xform/([dtgkhvuirzcs])v/$1ui/
-    - xform/(\w)b/$1in/
-    - xform/(\w)m/$1ian/
-    - xform/([aoe])\1(\w)/$1$2/
-    - "xform/(^|[ '])v/$1zh/"
-    - "xform/(^|[ '])i/$1ch/"
-    - "xform/(^|[ '])u/$1sh/"
-    - xform/([jqxy])v/$1u/
-    - xform/([nl])v/$1ü/
+# Rx: BlindingDark/rime-easy-en:customize:schema=double_pinyin_flypy
+  # __include: easy_en:/patch
+  # easy_en/enable_sentence: false
+# Rx: lotem/rime-octagram-data:customize:schema=luna_pinyin,model=hans
+  #  __include: grammar:/hant
+# Rx: BlindingDark/rime-lua-select-character:customize:schema=luna_pinyin
+  # __include: lua_select_character:/patch # 需要lua_selector打开本行注释
 
-reverse_lookup:
-  dictionary: stroke
-  enable_completion: true
-  prefix: "`"
-  suffix: "'"
-  tips: 〔筆畫〕
-  preedit_format:
-    - xlit/hspnz/一丨丿丶乙/
-  comment_format:
-    - xform/([nl])v/$1ü/
-
-punctuator:
-  import_preset: default
-
-key_binder:
-  import_preset: default
-
-recognizer:
-  import_preset: default
-  patterns:
-    reverse_lookup: "`[a-z]*'?$"
