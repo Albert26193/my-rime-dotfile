@@ -4,6 +4,7 @@ patch:
   # 方案列表(即输入法列表)
   schema_list:
     - schema: double_pinyin_flypy # 小鹤双拼
+    - schema: easy_en # 添加英文输入法
   
   style:
     horizontal: true            #  是否横排展示候选词
