@@ -14,12 +14,12 @@ patch:
 
   # 显示方案选单(即输入法列表)的快捷键
   switcher/hotkeys:
-    - Control+grave
-    - Control+Shift+grave
-    # Command需要写成Super，Option要写成Alt
-    - Super+Alt+grave
-    - Alt+Shift+grave
-    - Super+Control+grave
+    # - Control+grave
+    # - Control+Shift+grave
+    # # Command需要写成Super，Option要写成Alt
+    # - Super+Alt+grave
+    # - Alt+Shift+grave
+    # - Super+Control+grave
     - F4
 
   # 设置按左shift键上屏并切换到英文输入状态
