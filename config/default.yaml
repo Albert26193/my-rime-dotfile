@@ -31,6 +31,8 @@ switcher:
   abbreviate_options: true
   option_list_separator: '／'
 
+style/horizontal: true      # 候选词横排显示
+
 menu:
   page_size: 5
 

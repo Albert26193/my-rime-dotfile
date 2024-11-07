@@ -1,5 +1,7 @@
 patch:
-  show_notifications_when: appropriate     # 状态通知，可设为全开（always）全关（never）  
+  style/horizontal: true      # 候选词横排显示
+  candidate_list_layout: linear
+  show_notifications_when: always     # 状态通知，可设为全开（always）全关（never）  
 
   # 皮肤主题名称输入在下方，分为浅色和深色
   # 浅色主题
@@ -73,6 +75,7 @@ patch:
 
     mac_dark:
       name: Mac深色
+      candidate_list_layout: linear
       horizontal: true             # true横排，false竖排
       candidate_format: "%c %@ "   # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间
       corner_radius: 5                             # 窗口圆角
