@@ -1,0 +1,16 @@
+easy_en.yaml filter=lfs diff=lfs merge=lfs -text
+installation.yaml filter=lfs diff=lfs merge=lfs -text
+symbols.yaml filter=lfs diff=lfs merge=lfs -text
+double_pinyin_flypy.custom.yaml filter=lfs diff=lfs merge=lfs -text
+squirrel.custom.yaml filter=lfs diff=lfs merge=lfs -text
+user.yaml filter=lfs diff=lfs merge=lfs -text
+default.yaml filter=lfs diff=lfs merge=lfs -text
+double_pinyin_flypy.schema.yaml filter=lfs diff=lfs merge=lfs -text
+easy_en.schema.yaml filter=lfs diff=lfs merge=lfs -text
+default.custom.yaml filter=lfs diff=lfs merge=lfs -text
+emoji_suggestion.yaml filter=lfs diff=lfs merge=lfs -text
+key_bindings.yaml filter=lfs diff=lfs merge=lfs -text
+luna_pinyin.schema.yaml filter=lfs diff=lfs merge=lfs -text
+luna_pinyin.sogou_cs.dict.yaml filter=lfs diff=lfs merge=lfs -text
+punctuation.yaml filter=lfs diff=lfs merge=lfs -text
+amz-v2n3m1-zh-hans.gram filter=lfs diff=lfs merge=lfs -text

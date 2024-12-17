@@ -1,25 +1,3 @@
-# encoding: utf-8
----
-patch_double_pinyin_mspy:
-  __include: patch
-  speller/alphabet:
-    "zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA;"
-
-patch_terra_pinyin:
-  __include: patch
-  speller/alphabet: >-
-      zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA-;/<,>\
-  speller/initials: >-
-      zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
-
-patch:
-  schema/dependencies/@next: easy_en
-  engine/translators/@next: table_translator@easy_en
-  easy_en:
-    __include: easy_en.schema:/translator
-    enable_completion: true
-    enable_sentence: true
-    initial_quality: -1
-  recognizer/patterns/uppercase: ''
-  speller/alphabet:
-    __include: easy_en.schema:/speller/alphabet
+version https://git-lfs.github.com/spec/v1
+oid sha256:afe04a60736f8cca19b32e9bbec05f1eb5215c0dd657d5a0f025afa56c30ecbd
+size 691

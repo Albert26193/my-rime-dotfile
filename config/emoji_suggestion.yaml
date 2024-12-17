@@ -1,14 +1,3 @@
-# encoding: utf-8
-
-patch:
-  switches/@next:
-    name: emoji_suggestion
-    reset: 1
-    states: [ "🈚︎", "🈶️" ]
-  'engine/filters/@before 0':
-    simplifier@emoji_suggestion
-  emoji_suggestion:
-    opencc_config: emoji.json
-    option_name: emoji_suggestion
-    tips: none
-    inherit_comment: false
+version https://git-lfs.github.com/spec/v1
+oid sha256:a0283ee9ec569d424d1e581d5cccb2ec2c58a179a0d044b066aeb38ccc0aa846
+size 309
